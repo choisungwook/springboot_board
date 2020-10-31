@@ -23,7 +23,7 @@ public class Board_Controller {
     @GetMapping("/board/{id}")
     public String list(@PathVariable Long id, Model model){
         List<Response_index_boards_dto> boards = bbs_indexService.findAll();
-        List<Response_index_posts_dto> posts = post_indexService.findAll();
+        List<Response_index_posts_dto> posts = bbs_indexService.findPosts(id);
         String board_title = bbs_indexService.findTitleById(id);
 
         model.addAttribute("board_title", board_title);
