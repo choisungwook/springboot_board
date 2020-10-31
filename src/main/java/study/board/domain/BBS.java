@@ -25,15 +25,12 @@ public class BBS extends TimeBaseEntity{
 
     private String title;
 
-    private String content;
-
     @OneToMany(mappedBy = "bbs")
     List<Post> posts = new LinkedList<>();
 
     @Builder
-    public BBS(String title, String content) {
+    public BBS(String title) {
         this.title = title;
-        this.content = content;
     }
 
     public void add_post(Post post){
@@ -42,9 +39,5 @@ public class BBS extends TimeBaseEntity{
 
     public void modify_title(String title){
         this.title = title;
-    }
-
-    public void modify_content(String content){
-        this.content = content;
     }
 }

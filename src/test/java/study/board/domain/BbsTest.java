@@ -15,7 +15,6 @@ public class BbsTest {
     @Test
     public void 게시판Entity_생성(){
         BBS new_Member = BBS.builder()
-                .content("test content")
                 .title("test title")
                 .build();
     }

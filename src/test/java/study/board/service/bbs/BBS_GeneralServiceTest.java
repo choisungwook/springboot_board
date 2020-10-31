@@ -18,24 +18,23 @@ public class BBS_GeneralServiceTest {
 
     @Test
     public void 게시판생성(){
-        BBS board = create_board("테스트 제목", "테스트 내용");
+        BBS board = create_board("테스트 제목");
     }
 
     @Test(expected=IllegalStateException.class)
     public void 게시판중복_생성검사(){
         //given, when
-        BBS board1 = create_board("테스트 제목", "테스트 내용");
-        BBS board2 = create_board("테스트 제목", "테스트 내용");
+        BBS board1 = create_board("테스트 제목");
+        BBS board2 = create_board("테스트 제목");
 
         //then
         fail("게시판 중복검사 실패");
     }
 
-    private BBS create_board(String title, String content){
+    private BBS create_board(String title){
         //given
         BBS new_bbs = BBS.builder()
                 .title(title)
-                .content(content)
                 .build();
 
         //when
@@ -48,7 +47,6 @@ public class BBS_GeneralServiceTest {
         BBS find_bbs = bbs_generalService.findById(saveId);
         assertThat(find_bbs.getId()).isEqualTo(new_bbs.getId());
         assertThat(find_bbs.getTitle()).isEqualTo(new_bbs.getTitle());
-        assertThat(find_bbs.getContent()).isEqualTo(new_bbs.getContent());
         assertThat(find_bbs.getCreateDate()).isBefore(now);
         assertThat(find_bbs.getLastModifiedDate()).isBefore(now);
 
