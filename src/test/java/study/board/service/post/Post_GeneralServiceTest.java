@@ -9,9 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import study.board.domain.BBS;
 import study.board.domain.Post;
+import study.board.domain.Reply;
 import study.board.repository.BBSRepository;
 import study.board.repository.PostRepository;
+import study.board.repository.ReplyRepository;
 import study.board.service.bbs.BBS_GeneralService;
+import study.board.service.reply.Reply_GeneralService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,11 +31,14 @@ public class Post_GeneralServiceTest {
     @Autowired PostRepository postRepository;
     @Autowired BBS_GeneralService bbs_generalService;
     @Autowired BBSRepository bbsRepository;
+    @Autowired Reply_GeneralService reply_generalService;
+    @Autowired ReplyRepository replyRepository;
 
     @AfterEach
     public void clear(){
         postRepository.deleteAll();
         bbsRepository.deleteAll();
+        replyRepository.deleteAll();
     }
 
     @Test
@@ -185,6 +191,29 @@ public class Post_GeneralServiceTest {
         assertThat(post1.getHit()).isEqualTo(100L);
     }
 
+    @Test
+    public void 게시글_삭제(){
+        int reply_length = 10;
+        List<Reply> replies = new ArrayList<>();
+        //given
+        BBS board1 = create_board("게시판1");
+        Post post1 = create_post("테스트글1", "안녕하세요", board1);
+        for (int i = 0; i < reply_length; i++) {
+            String content = "댓글" + Integer.toString(i);
+            replies.add(create_reply(content, post1));
+        }
+
+        // when
+        post_generalService.delete(post1.getId());
+
+        //then
+        List<Post> all_posts = post_generalService.findAll();
+        List<Reply> all_replies = reply_generalService.findAll();
+
+        assertThat(all_posts.size()).isEqualTo(0L);
+        assertThat(all_replies.size()).isEqualTo(0L);
+    }
+
     private Post create_post(String title, String content, BBS bbs){
         // given
         Post new_post = Post.builder()
@@ -240,6 +269,24 @@ public class Post_GeneralServiceTest {
         assertThat(find_bbs.getLastModifiedDate()).isBefore(now);
 
         return find_bbs;
+    }
+
+    private Reply create_reply(String content, Post post){
+        // given
+        Reply new_reply = Reply.builder()
+                .content(content)
+                .post(post)
+                .build();
+
+        // when
+        Long saveId = reply_generalService.save(new_reply);
+
+        // then
+        Reply find_reply = reply_generalService.findById(saveId);
+        assertThat(find_reply.getId()).isEqualTo(new_reply.getId());
+        assertThat(find_reply.getContent()).isEqualTo(new_reply.getContent());
+
+        return find_reply;
     }
 
 }
