@@ -2,6 +2,7 @@ package study.board.service.bbs;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import study.board.domain.BBS;
 import study.board.domain.dto.index.Response_index_boards_dto;
 import study.board.repository.BBSRepository;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class BBS_IndexService {
     private final BBSRepository bbsRepository;
 
