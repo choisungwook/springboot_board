@@ -27,4 +27,13 @@ public class BBS_IndexService {
 
         return response;
     }
+
+    public String findTitleById(Long id){
+        BBS find_board = bbsRepository.findById(id)
+                .orElseThrow(
+                        () -> new IllegalStateException("존재하지 않는 게시판")
+                );
+
+        return find_board.getTitle();
+    }
 }
