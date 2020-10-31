@@ -149,7 +149,7 @@ public class Post_GeneralServiceTest {
             assertThat(find_post.getTitle()).isEqualTo(post1.getTitle());
             assertThat(find_post.getContent()).isEqualTo(post1.getContent());
         }catch(IllegalStateException e){
-            System.out.println(e);
+            fail("테스트 실패");
         }
     }
 
@@ -167,6 +167,22 @@ public class Post_GeneralServiceTest {
         }catch(IllegalStateException e){
             System.out.println(e);
         }
+    }
+
+    @Test
+    public void 조회수(){
+        // given
+        BBS board1 = create_board("게시판1");
+        Post post1 = create_post("테스트글", "안녕하세요", board1);
+
+        // when
+        int count = 100;
+        while(count-- > 0){
+            post_generalService.click(post1.getId());
+        }
+
+        // then
+        assertThat(post1.getHit()).isEqualTo(100L);
     }
 
     private Post create_post(String title, String content, BBS bbs){
