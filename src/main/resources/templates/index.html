@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <div th:replace="fragments/config :: config"></div>
+    <link rel="stylesheet" type="text/css" href="/assets/style.css">
     <title>index</title>
 </head>
 <body>
@@ -16,7 +16,9 @@
         <div class="cont-contents">
             <section class="cont-contents-sidemenu" >
                 <ul th:each="board : ${boards}">
-                    <li th:text="${board.title}"></li>
+                    <li>
+                        <a th:href="@{/board/{id} (id=${board.id})}" th:text="${board.title}"></a>
+                    </li>
                 </ul>
             </section>
 
@@ -45,5 +47,7 @@
             </section>
         </div>
     </div>
+
+    <script src="/assets/js/jquery-3.5.1.min.js"></script>
 </body>
 </html>
