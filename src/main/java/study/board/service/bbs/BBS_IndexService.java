@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.board.domain.BBS;
+import study.board.domain.Post;
 import study.board.domain.dto.index.Response_index_boards_dto;
-import study.board.repository.BBSRepository;
+import study.board.domain.dto.index.Response_index_posts_dto;
+import study.board.repository.BBS_IndexRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class BBS_IndexService {
-    private final BBSRepository bbsRepository;
+    private final BBS_IndexRepository bbsRepository;
 
     public List<Response_index_boards_dto> findAll(){
         List<BBS> all = bbsRepository.findAll();
@@ -35,5 +37,15 @@ public class BBS_IndexService {
                 );
 
         return find_board.getTitle();
+    }
+
+    public List<Response_index_posts_dto> findPosts(Long id){
+        List<Post> posts = bbsRepository.findPostsfromId(id);
+
+        List<Response_index_posts_dto> response = posts.stream()
+                .map(post -> new Response_index_posts_dto(post))
+                .collect(Collectors.toList());
+
+        return response;
     }
 }
