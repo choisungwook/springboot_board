@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 
 /***
@@ -25,11 +27,17 @@ public class BBS extends TimeBaseEntity{
 
     private String content;
 
+    @OneToMany(mappedBy = "bbs")
+    List<Post> posts = new LinkedList<>();
 
     @Builder
     public BBS(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public void add_post(Post post){
+        posts.add(post);
     }
 
     public void modify_title(String title){
