@@ -3,6 +3,17 @@ body {
     height: auto;
 }
 
+ol, ul {
+	list-style: none;
+}
+
+ul {
+padding-left: 20px;
+}
+
+a {color: #fff; text-decoration: none; outline: none}
+a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
+
 .cover_img{
     width: 100%;
     height: 100%;
