@@ -104,6 +104,34 @@ public class Post_GeneralServiceTest {
         }
     }
 
+    @Test
+    public void 제목수정(){
+        // given
+        BBS board1 = create_board("게시판1");
+        Post post1 = create_post("테스트글1", "안녕하세요", board1);
+
+        // when
+        String changed_title = "게시글 이름 변경";
+        post_generalService.change_title(post1.getId(), changed_title);
+
+        // then
+        assertThat(post1.getTitle()).isEqualTo(changed_title);
+    }
+
+    @Test
+    public void 내용수정(){
+        // given
+        BBS board1 = create_board("게시판1");
+        Post post1 = create_post("테스트글1", "안녕하세요", board1);
+
+        // when
+        String changed_content = "게시글 이름 변경";
+        post_generalService.change_content(post1.getId(), changed_content);
+
+        // then
+        assertThat(post1.getContent()).isEqualTo(changed_content);
+    }
+
 
     private Post create_post(String title, String content, BBS bbs){
         // given
