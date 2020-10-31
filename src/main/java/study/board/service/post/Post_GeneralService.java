@@ -5,9 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.board.domain.Post;
 import study.board.repository.PostRepository;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -71,5 +69,12 @@ public class Post_GeneralService {
                 );
 
         return find_post;
+    }
+
+    @Transactional
+    public void delete(Long id){
+        Post find_post = this.findById(id);
+
+        postRepository.delete(find_post);
     }
 }
