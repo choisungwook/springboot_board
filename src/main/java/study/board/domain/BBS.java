@@ -25,7 +25,7 @@ public class BBS extends TimeBaseEntity{
 
     private String title;
 
-    @OneToMany(mappedBy = "bbs")
+    @OneToMany(mappedBy = "bbs", cascade = CascadeType.ALL)
     List<Post> posts = new LinkedList<>();
 
     @Builder

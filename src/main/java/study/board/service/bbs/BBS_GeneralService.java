@@ -37,6 +37,13 @@ public class BBS_GeneralService {
         return saveId;
     }
 
+    @Transactional
+    public void delete(Long id){
+        BBS find_post = this.findById(id);
+
+        bbsRepository.delete(find_post);
+    }
+
     private boolean isExist(String title){
         return bbsRepository.existsByTitle(title);
     }
