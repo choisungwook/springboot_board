@@ -42,7 +42,7 @@ public class Post extends TimeBaseEntity{
     }
 
     public void increase_hit(){
-        hit += 1;
+        this.hit += 1L;
     }
 
     public void change_title(String title){

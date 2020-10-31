@@ -25,7 +25,21 @@ public class Post_GeneralService {
                 .orElseThrow(
                         () -> new IllegalStateException("존재하지 않은 게시글")
                 );
-        
+
+        return find_post;
+    }
+
+    /***
+     * 게시판 클릭
+     * @param id
+     * @return
+     */
+    public Post click(Long id){
+        Post find_post = postRepository.findById(id)
+                .orElseThrow(
+                        () -> new IllegalStateException("존재하지 않은 게시글")
+                );
+
         // 조회수 증가
         find_post.increase_hit();
 
