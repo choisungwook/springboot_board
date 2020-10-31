@@ -11,6 +11,16 @@ ul {
 padding-left: 20px;
 }
 
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+table {
+  width: 100%;
+  border: 1px solid black;
+}
+
 a {color: #fff; text-decoration: none; outline: none}
 a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
 
@@ -40,4 +50,8 @@ a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
 .cont-contents-board{
     border: 3px solid silver;
     padding: 5px 30px;
+}
+
+#board_id {
+    color: black !important;
 }
