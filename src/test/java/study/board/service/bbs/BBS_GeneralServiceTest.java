@@ -1,11 +1,14 @@
 package study.board.service.bbs;
 
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import study.board.domain.BBS;
+import study.board.repository.BBSRepository;
+
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.*;
@@ -13,8 +16,13 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class BBS_GeneralServiceTest {
-    @Autowired
-    BBS_GeneralService bbs_generalService;
+    @Autowired BBS_GeneralService bbs_generalService;
+    @Autowired BBSRepository bbsRepository;
+
+    @AfterEach
+    public void clear(){
+        bbsRepository.deleteAll();
+    }
 
     @Test
     public void 게시판생성(){
