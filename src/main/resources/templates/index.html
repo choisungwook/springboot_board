@@ -15,23 +15,23 @@
 
         <div class="cont-contents">
             <section class="cont-contents-sidemenu" >
-            <ul th:each="board : ${boards}">
-                <li th:text="${board.title}"></li>
-            </ul>
+                <ul th:each="board : ${boards}">
+                    <li th:text="${board.title}"></li>
+                </ul>
             </section>
 
             <section class="cont-contents-board">
-                <head>
+                <header>
                     <h1>게시판 제목</h1>
-                </head>
+                </header>
                 <div class="cont-board-list">
                     <table>
                         <thead>
                             <tr>
-                                <td>번호</td>
-                                <td>제목</td>
-                                <td>작성일</td>
-                            </tr>>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>작성일</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr>
