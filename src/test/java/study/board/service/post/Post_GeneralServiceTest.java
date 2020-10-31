@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -132,6 +133,41 @@ public class Post_GeneralServiceTest {
         assertThat(post1.getContent()).isEqualTo(changed_content);
     }
 
+    @Test
+    public void 존재하는_게시글_검색(){
+        // given
+        String title = "검색해줘요";
+        BBS board1 = create_board("게시판1");
+        Post post1 = create_post(title, "안녕하세요", board1);
+
+        // when
+        try{
+            Post find_post = post_generalService.findByTitle(title);
+
+            // then
+            assertThat(find_post.getId()).isEqualTo(post1.getId());
+            assertThat(find_post.getTitle()).isEqualTo(post1.getTitle());
+            assertThat(find_post.getContent()).isEqualTo(post1.getContent());
+        }catch(IllegalStateException e){
+            System.out.println(e);
+        }
+    }
+
+    @Test
+    public void 존재하는않는_게시글_검색(){
+        // given
+        String title = "검색해줘요";
+        BBS board1 = create_board("게시판1");
+        Post post1 = create_post(title, "안녕하세요", board1);
+
+        // when
+        try{
+            Post find_post = post_generalService.findByTitle("없는 게시글");
+            fail("테스트 실패");
+        }catch(IllegalStateException e){
+            System.out.println(e);
+        }
+    }
 
     private Post create_post(String title, String content, BBS bbs){
         // given
