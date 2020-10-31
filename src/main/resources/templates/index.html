@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div th:replace="fragments/config :: config"></div>
+    <title>index</title>
+</head>
+<body>
+    <div class="container">
+        <div class="cont-header">
+            <img src="/assets/head_image.jpg" class="cover_img">
+        </div>
+
+        <div class="cont-contents">
+            <section class="cont-contents-sidemenu" >
+            <ul th:each="board : ${boards}">
+                <li th:text="${board.title}"></li>
+            </ul>
+            </section>
+
+            <section class="cont-contents-board">
+                <head>
+                    <h1>게시판 제목</h1>
+                </head>
+                <div class="cont-board-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>번호</td>
+                                <td>제목</td>
+                                <td>작성일</td>
+                            </tr>>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
