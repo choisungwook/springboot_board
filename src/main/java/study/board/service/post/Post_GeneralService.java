@@ -50,12 +50,14 @@ public class Post_GeneralService {
         return postRepository.findAll();
     }
 
+    @Transactional
     public void change_title(Long id, String title){
         Post find_post = this.findById(id);
 
         find_post.change_title(title);
     }
 
+    @Transactional
     public void change_content(Long id, String content){
         Post find_post = this.findById(id);
 
