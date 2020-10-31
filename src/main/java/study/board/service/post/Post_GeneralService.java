@@ -7,6 +7,7 @@ import study.board.domain.Post;
 import study.board.repository.PostRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -45,5 +46,14 @@ public class Post_GeneralService {
         Post find_post = this.findById(id);
 
         find_post.change_content(content);
+    }
+
+    public Post findByTitle(String title){
+        Post find_post = postRepository.findByTitle(title)
+                .orElseThrow(
+                        () -> new IllegalStateException("존재하지 않은 게시글")
+                );
+
+        return find_post;
     }
 }
