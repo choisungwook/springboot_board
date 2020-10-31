@@ -103,32 +103,7 @@ public class Reply_GeneralServiceTest {
                 .forEach(r -> System.out.println("댓글: " +  r.getContent()));
     }
 
-    @Test
-    public void 댓글1개_삭제(){
-        int reply_length = 10;
-        List<Reply> replies = new ArrayList<>();
-        //given
-        BBS board1 = create_board("게시판1");
-        Post post1 = create_post("테스트글1", "안녕하세요", board1);
-        for (int i = 0; i < reply_length; i++) {
-            String content = "댓글" + Integer.toString(i);
-            replies.add(create_reply(content, post1));
-        }
-
-        // when
-        Reply delete_remove = replies.remove(3);
-        reply_generalService.delete(delete_remove.getId());
-
-        //then
-        List<Reply> all = reply_generalService.findAll();
-        assertThat(all.size()).isEqualTo(reply_length - 1);
-
-        System.out.println("게시판: " + board1.getTitle());
-        board1.getPosts().stream()
-                .forEach(p -> System.out.println("게시글 제목: " + p.getTitle() + ", " + "게시글 내용: " + p.getContent()));
-        post1.getReplies().stream()
-                .forEach(r -> System.out.println("댓글: " +  r.getContent()));
-    }
+    
 
     private Post create_post(String title, String content, BBS bbs){
         // given
