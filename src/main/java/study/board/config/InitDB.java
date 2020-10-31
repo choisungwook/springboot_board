@@ -13,6 +13,9 @@ import study.board.service.reply.Reply_GeneralService;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @Profile("local")
 @Component
@@ -40,27 +43,53 @@ public class InitDB {
 
         // 게시판1
         public void init1(){
+            int post_length = 200;
             int reply_length = 10;
+            List<Post> posts = new ArrayList<>();
 
-            //given, when
+            // 게시판
             BBS board = create_board("게시판1");
-            Post post = create_post("테스트글1", "안녕하세요", board);
+            
+            // 게시글
+            for (int i = 0; i < post_length; i++) {
+                String title = "게시판1-" + "게시글" + Integer.toString(i);
+                Post post = create_post(title, "안녕하세요", board);
+                posts.add(post);
+            }
+            
+            // 댓글
+            Random random = new Random();
             for (int i = 0; i < reply_length; i++) {
+                int postId = random.nextInt(post_length);
+
                 String content = "댓글" + Integer.toString(i);
-                create_reply(content, post);
+                create_reply(content, posts.get(postId));
             }
         }
 
         // 게시판2
         public void init2(){
+            int post_length = 200;
             int reply_length = 10;
+            List<Post> posts = new ArrayList<>();
 
-            //given, when
+            // 게시판
             BBS board = create_board("게시판2");
-            Post post = create_post("테스트글1", "안녕하세요", board);
+
+            // 게시글
+            for (int i = 0; i < post_length; i++) {
+                String title = "게시판2-" + "게시글" + Integer.toString(i);
+                Post post = create_post(title, "안녕하세요", board);
+                posts.add(post);
+            }
+
+            // 댓글
+            Random random = new Random();
             for (int i = 0; i < reply_length; i++) {
+                int postId = random.nextInt(post_length);
+
                 String content = "댓글" + Integer.toString(i);
-                create_reply(content, post);
+                create_reply(content, posts.get(postId));
             }
         }
 
