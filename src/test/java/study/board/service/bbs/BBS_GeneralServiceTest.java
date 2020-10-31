@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import study.board.domain.BBS;
-
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.*;
@@ -20,6 +19,16 @@ public class BBS_GeneralServiceTest {
     @Test
     public void 게시판생성(){
         BBS board = create_board("테스트 제목", "테스트 내용");
+    }
+
+    @Test(expected=IllegalStateException.class)
+    public void 게시판중복_생성검사(){
+        //given, when
+        BBS board1 = create_board("테스트 제목", "테스트 내용");
+        BBS board2 = create_board("테스트 제목", "테스트 내용");
+
+        //then
+        fail("게시판 중복검사 실패");
     }
 
     private BBS create_board(String title, String content){
