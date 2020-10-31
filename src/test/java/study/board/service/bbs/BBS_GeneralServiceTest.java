@@ -43,6 +43,11 @@ public class BBS_GeneralServiceTest {
         if(saveId == -1) throw new IllegalStateException("이미 존재하는 게시판");
 
         //then
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         LocalDateTime now = LocalDateTime.now();
         BBS find_bbs = bbs_generalService.findById(saveId);
         assertThat(find_bbs.getId()).isEqualTo(new_bbs.getId());
