@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import study.board.domain.Reply;
 import study.board.repository.ReplyRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -24,5 +26,17 @@ public class Reply_GeneralService {
                 );
 
         return find_reply;
+    }
+
+    public List<Reply> findAll(){
+        return replyRepository.findAll();
+    }
+
+    @Transactional
+    public void delete(Long id){
+        Reply find_reply = this.findById(id);
+        find_reply.getPost().delete_reply(find_reply);
+
+        replyRepository.delete(find_reply);
     }
 }

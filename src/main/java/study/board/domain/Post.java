@@ -50,6 +50,10 @@ public class Post extends TimeBaseEntity{
         this.replies.add(reply);
     }
 
+    public void delete_reply(Reply reply){
+        this.replies.remove(reply);
+    }
+
     public void increase_hit(){
         this.hit += 1L;
     }
