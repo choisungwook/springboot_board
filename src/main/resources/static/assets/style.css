@@ -77,3 +77,29 @@ a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
 .active {
     border: 1px solid black;
 }
+
+
+/* post view */
+.post-view {
+
+}
+
+.post-view-header{
+}
+
+.post-view-information {
+    display: flex;
+}
+
+.post-view-content {
+}
+
+.post-view-reply{
+    background-color: #f8f8f8;
+    padding: 10px 10px;
+}
+
+.reply-write textarea {
+    width: 100%;
+    font-size: 13px;
+}

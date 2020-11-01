@@ -23,7 +23,27 @@
         </section>
 
         <section class="cont-contents-board">
+            <div class="post-view">
+                <div class="post-view-header">
+                    <h1 th:text="${post.title}"></h1>
+                    <div class="post-view-information">
+                        <span th:text="'작성날짜: ' + ${post.created}"></span>
+                        <span th:text="'조회수: ' + ${post.hit}"></span>
+                    </div>
+                </div>
 
+                <div class="post-view-content">
+                    <span th:text="${post.content}"></span>
+                </div>
+
+                <div class="post-view-reply">
+                    <div class="reply-write">
+                        <textarea placeholder="댓글 작성 시 타인에 대한 배려와 책임을 담아주세요">
+
+                        </textarea>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 </div>
