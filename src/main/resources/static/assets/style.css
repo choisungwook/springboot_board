@@ -7,6 +7,10 @@ ol, ul {
 	list-style: none;
 }
 
+ol {
+    color: black;
+}
+
 ul {
 padding-left: 20px;
 }
@@ -54,4 +58,22 @@ a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
 
 #board_id {
     color: black !important;
+}
+
+#pagemarker {
+    display: flex;
+    justify-content: center;
+}
+
+.pagemakrer-item {
+    margin: 15px 0px;
+}
+
+.pagemakrer-item-link {
+    color: black;
+    padding: 10px 10px;
+}
+
+.active {
+    border: 1px solid black;
 }
