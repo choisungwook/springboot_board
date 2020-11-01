@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/assets/style.css">
+    <title>게시글</title>
+</head>
+<body>
+<div class="container">
+    <div class="cont-header">
+        <img src="/assets/head_image.jpg" class="cover_img">
+    </div>
+
+    <div class="cont-contents">
+        <section class="cont-contents-sidemenu" >
+            <ul th:each="board : ${boards}">
+                <li>
+                    <a th:href="@{/board/{id} (id=${board.id})}" th:text="${board.title}"></a>
+                </li>
+            </ul>
+        </section>
+
+        <section class="cont-contents-board">
+
+        </section>
+    </div>
+</div>
+</body>
+</html>
