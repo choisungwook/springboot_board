@@ -26,6 +26,7 @@
             <header>
                 <h1 th:text="${board_title}">게시판 제목</h1>
             </header>
+            <!-- 게시글  -->
             <div class="cont-board-list">
                 <table>
                     <thead>
@@ -47,6 +48,26 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <!--  페이징 마커  -->
+                <ol id="pagemarker">
+                    <a th:if="${from > 1}" class="pagemakrer-item-link"
+                       th:href="@{'/board/' + ${board_id}(searchpage=${from - 1})}">이전 페이지</a>
+
+                    <li class="pagemakrer-item" th:each="i: ${#numbers.sequence(from, to)}">
+                        <a class="pagemakrer-item-link active"
+                           th:if="${posts.number+1 == i}"
+                           th:text="${i}"
+                           th:href="@{'/board/' + ${board_id}(searchpage=${i})}"></a>
+                        <a class="pagemakrer-item-link"
+                           th:unless="${posts.number+1 == i}"
+                           th:text="${i}"
+                           th:href="@{'/board/' + ${board_id}(searchpage=${i})}"></a>
+                    </li>
+
+                    <a th:if="${to < posts.totalPages}" class="pagemakrer-item-link"
+                       th:href="@{'/board/' + ${board_id}(searchpage=${to + 1})}">다음 페이지</a>
+                </ol>
             </div>
         </section>
     </div>
