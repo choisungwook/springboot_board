@@ -1,7 +1,12 @@
 package study.board.repository;
 
+import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import study.board.domain.Post;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import study.board.domain.dto.index.QResponse_index_posts_dto;
+import study.board.domain.dto.index.Response_index_posts_dto;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -16,14 +21,19 @@ public class BBS_IndexServiceCustomImpl implements BBS_IndexServiceCustom{
     }
 
     @Override
-    public List<Post> findPostsfromId(Long id) {
-        List<Post> posts = jpaQueryFactory
-                .select(post).distinct()
+    public PageImpl<Response_index_posts_dto> findPostsfromId(Long id, Pageable pageable) {
+        QueryResults<Response_index_posts_dto> results = jpaQueryFactory
+                .select(new QResponse_index_posts_dto(post.id, post.title, post.hit, post.createDate))
                 .from(bBS)
                 .join(bBS.posts, post)
                 .where(bBS.id.eq(id))
-                .fetch();
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
 
-        return posts;
+        List<Response_index_posts_dto> content = results.getResults();
+        long total = results.getTotal();
+
+        return new PageImpl<>(content, pageable, total);
     }
 }

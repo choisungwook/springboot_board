@@ -1,6 +1,9 @@
 package study.board.service.bbs;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.board.domain.BBS;
@@ -39,13 +42,7 @@ public class BBS_IndexService {
         return find_board.getTitle();
     }
 
-    public List<Response_index_posts_dto> findPosts(Long id){
-        List<Post> posts = bbsRepository.findPostsfromId(id);
-
-        List<Response_index_posts_dto> response = posts.stream()
-                .map(post -> new Response_index_posts_dto(post))
-                .collect(Collectors.toList());
-
-        return response;
+    public PageImpl<Response_index_posts_dto> findPosts(Long id, Pageable pageable){
+        return bbsRepository.findPostsfromId(id, pageable);
     }
 }

@@ -1,9 +1,9 @@
 package study.board.repository;
 
-import study.board.domain.Post;
-
-import java.util.List;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import study.board.domain.dto.index.Response_index_posts_dto;
 
 public interface BBS_IndexServiceCustom {
-    List<Post> findPostsfromId(Long id);
+    PageImpl<Response_index_posts_dto> findPostsfromId(Long id, Pageable pageable);
 }
