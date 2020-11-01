@@ -2,6 +2,7 @@ package study.board.repository;
 
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import study.board.domain.dto.index.QResponse_index_posts_dto;
@@ -21,7 +22,7 @@ public class BBS_IndexServiceCustomImpl implements BBS_IndexServiceCustom{
     }
 
     @Override
-    public PageImpl<Response_index_posts_dto> findPostsfromId(Long id, Pageable pageable) {
+    public Page<Response_index_posts_dto> findPostsfromId(Long id, Pageable pageable) {
         QueryResults<Response_index_posts_dto> results = jpaQueryFactory
                 .select(new QResponse_index_posts_dto(post.id, post.title, post.hit, post.createDate))
                 .from(bBS)
