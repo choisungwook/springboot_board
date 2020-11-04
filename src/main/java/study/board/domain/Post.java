@@ -25,7 +25,7 @@ public class Post extends TimeBaseEntity{
 
     private Long hit;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "bbs_id")
     private BBS bbs;
 
