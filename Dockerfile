@@ -1,5 +1,5 @@
 FROM adoptopenjdk/openjdk11
-JAR_FILE=target/*.jar
+ARG JAR_FILE=target/*.jar
 
 EXPOSE 9090
 COPY ${JAR_FILE} app.jar
